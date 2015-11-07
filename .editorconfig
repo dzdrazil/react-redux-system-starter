@@ -1,0 +1,22 @@
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[src/**.{js,jsx,scss,html}]
+indent_size = 4
+indent_style = space
+charset = utf-8
+
+# Matches the exact files either package.json
+[{package.json,.babelrc,.eslintrc}]
+indent_style = space
+indent_size = 2
+
+[{Gulpfile.js}]
+indent_size = 4
+indent_style = space
+charset = utf-8
