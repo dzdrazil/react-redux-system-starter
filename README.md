@@ -10,6 +10,7 @@ This is a rough outline of a project setup with:
 
 TODO:
 
+* (Follow this issue)[https://github.com/babel/babel/issues/2645] and upgrade babel version when appropriate to get decorator support back
 * Implement PostCSS or SASS
 * Implement some smart and dumb components
   * Redux explanation (here)[http://redux.js.org/docs/basics/UsageWithReact.html]
