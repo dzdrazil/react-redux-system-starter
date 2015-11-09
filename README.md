@@ -1,6 +1,8 @@
 # react-redux-system-starter
 *not* setup as isomorphic
 
+*Note:* This was originally intended to use jspm / system.js; however, because that project is still tied to babel 5.2.8 at the time of this writing, the project is using Browserify.  Expect this to change at some point in the future.
+
 This is a rough outline of a project setup with:
 
 * Airbnb eslint config
