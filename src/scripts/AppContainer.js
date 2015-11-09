@@ -1,15 +1,22 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 class AppContainer extends Component {
     render() {
         let props = this.props;
         return (
-            <h1>Hello {props.hello.message}</h1>
+            <div>
+                <h1>Hello {props.user ? props.user.username : 'World'}!</h1>
+                {this.props.children}
+            </div>
         );
     }
 }
 
+AppContainer.propTypes = {
+    children: PropTypes.object
+};
+
 export default connect(state => ({
-    hello: state.hello
+    user: state.auth.user
 }))(AppContainer);

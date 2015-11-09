@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import hello from './helloReducer';
+import auth from './authReducer';
 
 export default combineReducers({
-    hello
+    auth
 });
