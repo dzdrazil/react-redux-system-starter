@@ -13,7 +13,7 @@ TODO:
 - [x] Add react router
 - [ ] Integrate react-router into redux state using redux router?
 - [x] Add some async actions
-- [ ] (Follow this issue)[https://github.com/babel/babel/issues/2645] and upgrade babel version when appropriate to get decorator support back
+- [ ] Follow (this issue)[https://github.com/babel/babel/issues/2645] and upgrade babel version when appropriate to get decorator support back
 - [ ] Implement PostCSS or SASS
 - [ ] Implement some smart and dumb components
   * Redux explanation (here)[http://redux.js.org/docs/basics/UsageWithReact.html]
