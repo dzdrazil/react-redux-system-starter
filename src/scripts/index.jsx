@@ -8,8 +8,8 @@ import thunk from 'redux-thunk';
 import reducers from './reducers/index';
 
 import App from './AppContainer';
-import Login from './components/layouts/Login';
-import Home from './components/layouts/Home';
+import Login from './components/containers/Login';
+import Home from './components/containers/Home';
 
 
 let createStoreWithMiddleware = applyMiddleware(
