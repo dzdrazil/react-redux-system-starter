@@ -1,7 +1,4 @@
 {
   "presets": ["es2015", "stage-1", "react"],
-  "plugins":["transform-object-rest-spread"],
-  "ignore": [
-    "node_modules"
-  ]
+  "plugins":["transform-object-rest-spread"]
 }
