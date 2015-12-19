@@ -19,9 +19,9 @@ class LoginLayout extends Component {
                 username: this.refs._usernameInput.value,
                 password: this.refs._passwordInput.value
             })
-            .then(() => {
-                this.props.history.pushState(null, '/home');
-            });
+            // .then(() => {
+            //     this.props.history.pushState(null, '/home');
+            // });
     }
 
     render() {
