@@ -33,7 +33,7 @@ const AuthenticationState = t.struct({
      * @param {Null|Error}
      */
     error: t.maybe(t.Error) // loading the user may or may not have errored
-});
+}, 'AuthenticationState');
 
 // these states are effectively constant types-
 // the application may switch between them, but their values aren't
