@@ -14,14 +14,11 @@ class LoginLayout extends Component {
     submit(e) {
         e.preventDefault();
 
-        this.props.
-            submit({
+        this.props
+            .submit({
                 username: this.refs._usernameInput.value,
                 password: this.refs._passwordInput.value
-            })
-            // .then(() => {
-            //     this.props.history.pushState(null, '/home');
-            // });
+            });
     }
 
     render() {
