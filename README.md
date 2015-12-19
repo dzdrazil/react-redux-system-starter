@@ -12,8 +12,9 @@ This is a rough outline of a project setup with:
 
 TODO:
 
+- [x] Add immutable support (note: done with the delightful [tcomb](http://gcanti.github.io/tcomb/index.html) )
 - [x] Add react router
-- [ ] Integrate react-router into redux state using redux router
+- [x] Integrate react-router into redux state using redux router
 - [x] Add some async actions
 - [ ] Follow [this issue](https://phabricator.babeljs.io/T2645) and upgrade babel version when appropriate to get decorator support back
 - [ ] Implement PostCSS or SASS
