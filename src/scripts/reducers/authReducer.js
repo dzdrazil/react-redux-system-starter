@@ -64,6 +64,13 @@ export default createReducer(INITIAL_STATE, {
     },
 
     [LOGIN_SUCCESS](state, action) {
-        return Object.assign({}, INITIAL_STATE, {user: action.payload});
+        return AuthenticationState.update(
+            state,
+            {
+                user: {
+                    $set: action.payload
+                }
+            }
+        );
     }
 });

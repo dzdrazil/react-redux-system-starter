@@ -15,6 +15,7 @@ import App from './AppContainer';
 import Login from './components/containers/Login';
 import Home from './components/containers/Home';
 
+import {fetchPets} from './actions/pets/index';
 
 let createStoreWithMiddleware = applyMiddleware(
   thunk
@@ -33,7 +34,7 @@ render(
         <Router history={history}>
             <Route path="/" component={App} >
                 <IndexRoute component={Login} />
-                <Route path="home" component={Home} />
+                <Route path="home" component={Home} onEnter={() => store.dispatch(fetchPets())}/>
             </Route>
         </Router>
     </Provider>,

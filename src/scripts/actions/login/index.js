@@ -11,6 +11,9 @@
  *  - private action message types (used for typing payloads)
  *  - private actions (used in tandem with `thunk` actions)
  *  - public actions
+ *
+ *  HOWEVER, this involves a *lot* of boilerplate code.  Alternatively,
+ *  check out the actions/pets/index.js file for an example of how to cut down on the boilerplate.
  */
 
 import t from 'tcomb'; // used for creating typed classes - in particular, action payloads
@@ -78,7 +81,8 @@ let LoginFailureMessage = t.struct({
  * - login failed (indicates that the process errored out, and the error can be stored for assisting the user)
  *
  * This is a fairly common pattern, and there is some room here to abstract away what will likely be a likely
- * copy-paste candidate set of code. It's left here, in all of its glory, for demonstration purposes.
+ * copy-paste candidate set of code. It's left here, in all of its glory, for demonstration purposes. As an alternative,
+ * check out the actions/pets/index.js file for an example of how to reduce the boilerplate.
  */
 let loginStart = () => ({type: LOGIN_STARTED});
 
@@ -116,9 +120,12 @@ export let login = (credentials) => {
 
         return UserService
             .login(credentials)
-            .then(() => dispatch(loginSuccess(new LoginSuccessMessage(credentials))))
+            .then(() => dispatch(loginSuccess(new LoginSuccessMessage({username: credentials.username}))))
             .then(() => dispatch(pushPath('/home')))
-            .catch(e => dispatch(loginFailed(new LoginFailureMessage({error: e}))));
+            .catch(e => {
+                console.error(e);
+                dispatch(loginFailed(new LoginFailureMessage({error: e})));
+            });
     };
 };
 
