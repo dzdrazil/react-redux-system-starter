@@ -6,11 +6,31 @@ const HOME_JSX = (
 );
 
 class HomeLayout extends Component {
+
+    getPetsMarkup(props) {
+        if (props.isLoading) {
+            return (<p>Loading your pets...</p>);
+        } else if (props.error) {
+            return (<p>Theres been an error!</p>);
+        }
+
+        return (
+            <ul>
+                {props.pets.map(pet => (<li key={pet.id}>{pet.name}</li>))}
+            </ul>
+        );
+    }
+
     render() {
-        return HOME_JSX;
+        return (
+            <section>
+                {HOME_JSX}
+                {this.getPetsMarkup(this.props)}
+            </section>
+        );
     }
 }
 
-let mapStateToProps = state => state;
+let mapStateToProps = state => ({...state.pets});
 
 export default connect(mapStateToProps)(HomeLayout);
