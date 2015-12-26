@@ -1,7 +1,6 @@
 import createAsyncActions from '../createAsyncActions';
 import PetService from '../../domain/services/PetService';
 
-
 /**
  * Call this action to trigger loading pets
  *

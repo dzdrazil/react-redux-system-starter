@@ -51,6 +51,9 @@ const LOADING_STATE = new AuthenticationState({
 });
 
 export default createReducer(INITIAL_STATE, {
+    // The state is simple enough that in these action handlers, it's generally
+    // easier (fewer lines, fewer mistakes) to simply create a whole new
+    // state object than it is to invoke an update on the previous one
     [LOGIN_STARTED]() {
         return LOADING_STATE;
     },
@@ -64,13 +67,10 @@ export default createReducer(INITIAL_STATE, {
     },
 
     [LOGIN_SUCCESS](state, action) {
-        return AuthenticationState.update(
-            state,
-            {
-                user: {
-                    $set: action.payload
-                }
-            }
-        );
+        return new AuthenticationState({
+            isLoading: false,
+            error: null,
+            user: action.payload
+        });
     }
 });
