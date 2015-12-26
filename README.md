@@ -5,10 +5,34 @@
 
 This is a rough outline of a project setup with:
 
+Tools:
+
 * Airbnb eslint config
 * Babel 6.1.2
 * gulp
 * browserify
+
+Libraries:
+
+* React
+* react-router
+* [Redux](http://rackt.org/redux/)
+* [redux-simple-router](https://github.com/rackt/redux-simple-router) (exposes an action to invoke route changes)
+* [tcomb](https://github.com/gcanti/tcomb) (provides immutable, typed objects and collections)
+* [tcomb-form](https://github.com/gcanti/tcomb-form) (provides form markup validation, validation and error styling based on tcomb types)
+* [axios](https://github.com/mzabriskie/axios) (for making AJAX requests)
+
+Reducing boilerplate:
+
+* redux-create-router (more or less copied from the [reducing boilerplate](http://rackt.org/redux/docs/recipes/ReducingBoilerplate.html) tutorial)
+* src/scripts/actions/createAsyncActions.js
+    * this one is a hand-rolled action creator function, unlike common middleware solutions such as [redux-async-flow](https://www.npmjs.com/package/redux-async-flow) or [redux-combine-actions](https://www.npmjs.com/package/redux-combine-actions)
+    * It's used primarily to demo how easy it is to roll your own, and depending on your taste you may want one of the above two instead
+
+Totally tangential additions:
+
+* [swagger-mock-api](https://github.com/dzdrazil/swagger-mock-api) because it's handy
+* watch-based building and live reloading via `gulp --watch`
 
 TODO:
 
