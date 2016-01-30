@@ -1,5 +1,7 @@
 import t from 'tcomb';
 
+import {Password} from './Password';
+
 /**
  * @class User
  */
@@ -19,5 +21,5 @@ export const UserCredentials = User.extend({
      * @property password
      * @type {String}
      */
-    password: t.String
+    password: Password
 }, 'UserCredentials');

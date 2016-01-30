@@ -1,6 +1,16 @@
 import t from 'tcomb';
 import {createReducer} from 'redux-create-reducer';
 
+// import actions to respond to
+import {
+    PETS_LOAD_START,
+    PETS_LOAD_SUCCESS,
+    PETS_LOAD_FAIL,
+    CREATE_PET_START,
+    CREATE_PET_SUCCESS,
+    CREATE_PET_FAIL
+} from '../actions/pets';
+
 // type imported for type checking, naturally
 import {PetList} from '../domain/types/Pet';
 
@@ -43,11 +53,11 @@ const LOADING_STATE = new PetsState({
 });
 
 export default createReducer(INITIAL_STATE, {
-    PETS_LOAD_STARTED() {
+    [PETS_LOAD_START]() {
         return LOADING_STATE;
     },
 
-    PETS_LOAD_FAILED(state, action) {
+    [PETS_LOAD_FAIL](state, action) {
         return new PetsState({
             isLoading: false,
             error: action.payload.error,
@@ -55,7 +65,7 @@ export default createReducer(INITIAL_STATE, {
         });
     },
 
-    PETS_LOAD_SUCCEEDED(state, action) {
+    [PETS_LOAD_SUCCESS](state, action) {
         return new PetsState({
             isLoading: false,
             error: null,
@@ -63,7 +73,7 @@ export default createReducer(INITIAL_STATE, {
         });
     },
 
-    PETS_CREATE_STARTED(state) {
+    [CREATE_PET_START](state) {
         return new PetsState({
             isLoading: true,
             error: null,
@@ -71,7 +81,7 @@ export default createReducer(INITIAL_STATE, {
         });
     },
 
-    PETS_CREATE_SUCCESS(state, action) {
+    [CREATE_PET_SUCCESS](state, action) {
         return new PetsState({
             isLoading: false,
             error: null,
@@ -81,7 +91,7 @@ export default createReducer(INITIAL_STATE, {
         });
     },
 
-    PETS_CREATE_FAILURE(state, action) {
+    [CREATE_PET_FAIL](state, action) {
         return new PetsState({
             isLoading: false,
             error: action.payload.error,

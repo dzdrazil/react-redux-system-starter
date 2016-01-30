@@ -2,12 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import t from 'tcomb-form';
 const Form = t.form.Form;
 
-import {Password} from '../../domain/types/Password';
+import {UserCredentials} from '../../domain/types/User';
 
-let LoginFormModel = t.struct({
-    username: t.String,
-    password: Password
-});
+let LoginFormModel = UserCredentials;
 
 let loginFormOptions = {
     order: ['username', 'password'],
@@ -39,14 +36,13 @@ export default class LoginForm extends Component {
     }
 
     submit(e) {
+        e.preventDefault();
         let value = this.refs.form.getValue();
         if (!value) {
-            // validation error
-            e.preventDefault();
             return;
         }
 
-        this.props.submit(e, value);
+        this.props.submit(value);
     }
 
     render() {
