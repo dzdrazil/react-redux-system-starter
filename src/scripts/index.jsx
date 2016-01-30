@@ -2,11 +2,9 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import {Router, Route, IndexRoute} from 'react-router';
-// Don't want hash routing? (i.e. with # in the url)?
-// simply import {createHistory} from 'history'
-import createHistory from 'history/lib/createHashHistory';
-import {syncReduxAndRouter} from 'redux-simple-router';
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+
+import {syncHistory} from 'react-router-redux';
 import thunk from 'redux-thunk';
 
 import reducers from './reducers/index';
@@ -17,21 +15,22 @@ import Home from './components/containers/Home';
 
 import {fetchPets} from './actions/pets/index';
 
-let createStoreWithMiddleware = applyMiddleware(
-  thunk
+// setup history
+const reduxRouterMiddleware = syncHistory(hashHistory);
+
+// setup store (combination of middleware and reducers)
+const createStoreWithMiddleware = applyMiddleware(
+  thunk,
+  reduxRouterMiddleware
 )(createStore);
-let store = createStoreWithMiddleware(reducers);
-let history = createHistory({
-    queryKey: false // not ideal, but it looks cleaner when HTML5 history isn't an option
-});
+const store = createStoreWithMiddleware(reducers);
 
-syncReduxAndRouter(history, store);
-
-let rootElement = document.getElementById('js-root-container');
+// mount and render the application
+const rootElement = document.getElementById('js-root-container');
 
 render(
     <Provider store={store}>
-        <Router history={history}>
+        <Router history={hashHistory}>
             <Route path="/" component={App} >
                 <IndexRoute component={Login} />
                 <Route path="home" component={Home} onEnter={() => store.dispatch(fetchPets())}/>

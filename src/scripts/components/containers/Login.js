@@ -11,7 +11,7 @@ class LoginLayout extends Component {
         isLoading: PropTypes.bool.isRequired,
         isError: PropTypes.bool.isRequired,
         history: PropTypes.object.isRequired
-    }
+    };
 
     submit(e, loginFormModel) {
         e.preventDefault();

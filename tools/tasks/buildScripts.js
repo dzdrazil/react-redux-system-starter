@@ -24,7 +24,10 @@ let bundler = watchify(
 
 function bundle() {
     bundler.bundle()
-        .on('error', err => console.error(err) && this.emit('end'))
+        .on('error', function onBundleError(e) {
+            console.error(e);
+            this.emit('end');
+        })
         .pipe(source(paths.out))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: !cli.isProduction }))
@@ -40,7 +43,7 @@ if (cli.watch) {
     });
 } else {
     console.log('single build running');
-    bundler.on('log', () => {
+    bundler.on('log', function onSingleBuildEnd() {
         bundler.close();
         this.emit('end');
     });

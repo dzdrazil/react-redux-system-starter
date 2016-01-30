@@ -18,7 +18,7 @@
 
 import t from 'tcomb'; // used for creating typed classes - in particular, action payloads
                        // note that actions must be vanilla objects per redux convention (to support hot-reload, etc)
-import {pushPath} from 'redux-simple-router'; // used by actions that need to change the URL / integrate with routing
+import {routeActions} from 'react-router-redux'; // used by actions that need to change the URL / integrate with routing
 
 import {User} from '../../domain/types/User'; // User class
 import UserService from '../../domain/services/UserService'; // UserService (for user-related APIs)
@@ -121,7 +121,7 @@ export let login = (credentials) => {
         return UserService
             .login(credentials)
             .then(() => dispatch(loginSuccess(new LoginSuccessMessage({username: credentials.username}))))
-            .then(() => dispatch(pushPath('/home')))
+            .then(() => dispatch(routeActions.push('/home')))
             .catch(e => {
                 console.error(e);
                 dispatch(loginFailed(new LoginFailureMessage({error: e})));

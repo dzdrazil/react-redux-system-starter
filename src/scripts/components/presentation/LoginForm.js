@@ -26,7 +26,7 @@ export default class LoginForm extends Component {
         submit: PropTypes.func.isRequired,
         isLoading: PropTypes.bool.isRequired,
         isErrored: PropTypes.bool.isRequired
-    }
+    };
 
     getStatusMessage() {
         if (this.props.isLoading) {
