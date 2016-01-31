@@ -6,14 +6,15 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 
 import {syncHistory} from 'react-router-redux';
 import thunk from 'redux-thunk';
+import { install as reduxLoop } from 'redux-loop';
 
-import reducers from './reducers/index';
+import reducers from './domain/reducers';
 
 import App from './AppContainer';
 import Login from './components/containers/Login';
 import Home from './components/containers/Home';
 
-import {fetchPets} from './actions/pets/index';
+import {fetchPets} from './domain/pets/PetActions';
 
 // setup history
 const reduxRouterMiddleware = syncHistory(hashHistory);
@@ -22,8 +23,8 @@ const reduxRouterMiddleware = syncHistory(hashHistory);
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
   reduxRouterMiddleware
-)(createStore);
-const store = createStoreWithMiddleware(reducers);
+)((window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore));
+const store = reduxLoop()(createStoreWithMiddleware)(reducers);
 
 // mount and render the application
 const rootElement = document.getElementById('js-root-container');

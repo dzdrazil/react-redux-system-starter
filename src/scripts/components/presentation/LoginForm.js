@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import t from 'tcomb-form';
 const Form = t.form.Form;
 
-import {UserCredentials} from '../../domain/types/User';
+import {UserCredentials} from '../../domain/user/UserTypes';
 
 let LoginFormModel = UserCredentials;
 

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {login} from '../../actions/login/index';
+import {loginStart} from '../../domain/auth/AuthActions';
 import LoginForm from '../presentation/LoginForm';
 
 class LoginLayout extends Component {
@@ -27,4 +27,4 @@ let mapStateToProps = state => ({
     isError: !!state.auth.error
 });
 
-export default connect(mapStateToProps, {submit: login})(LoginLayout);
+export default connect(mapStateToProps, {submit: loginStart})(LoginLayout);

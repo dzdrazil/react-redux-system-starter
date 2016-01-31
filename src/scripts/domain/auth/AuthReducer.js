@@ -1,16 +1,22 @@
 import t from 'tcomb';
 import {createReducer} from 'redux-create-reducer';
 
+
+import {routeActions} from 'react-router-redux'; // used by actions that need to change the URL / integrate with routing
+import { loop, Effects } from 'redux-loop';
+
+import { login } from './AuthEffects';
+
 // import action constants to establish
 // how new states should be derived
 import {
     LOGIN_STARTED,
     LOGIN_SUCCESS,
     LOGIN_FAILED
-} from '../actions/login/index';
+} from './AuthActions';
 
 // type imported for type checking, naturally
-import {User} from '../domain/types/User';
+import {User} from '../user/UserTypes';
 
 
 // define the type parameters for the state
@@ -50,12 +56,20 @@ const LOADING_STATE = new AuthenticationState({
     error: null
 });
 
+
 export default createReducer(INITIAL_STATE, {
     // The state is simple enough that in these action handlers, it's generally
     // easier (fewer lines, fewer mistakes) to simply create a whole new
     // state object than it is to invoke an update on the previous one
-    [LOGIN_STARTED]() {
-        return LOADING_STATE;
+    //
+    // note that this handler returns 'loop', meaning it not only returns
+    // a new state, but also describes the only next logical sequence of
+    // actions that are allowed by the result of this action
+    [LOGIN_STARTED](state, action) {
+        return loop(
+            LOADING_STATE,
+            Effects.promise(login, action.payload)
+        );
     },
 
     [LOGIN_FAILED](state, action) {
@@ -67,10 +81,13 @@ export default createReducer(INITIAL_STATE, {
     },
 
     [LOGIN_SUCCESS](state, action) {
-        return new AuthenticationState({
-            isLoading: false,
-            error: null,
-            user: action.payload
-        });
+        return loop(
+            new AuthenticationState({
+                isLoading: false,
+                error: null,
+                user: action.payload
+            }),
+            Effects.constant(routeActions.push('/home'))
+        );
     }
 });

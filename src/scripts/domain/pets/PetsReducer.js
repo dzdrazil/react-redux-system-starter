@@ -1,6 +1,8 @@
 import t from 'tcomb';
 import {createReducer} from 'redux-create-reducer';
 
+import { loop, Effects } from 'redux-loop';
+
 // import actions to respond to
 import {
     PETS_LOAD_START,
@@ -9,10 +11,15 @@ import {
     CREATE_PET_START,
     CREATE_PET_SUCCESS,
     CREATE_PET_FAIL
-} from '../actions/pets';
+} from './PetActions';
+
+import {
+    loadPets,
+    createPet
+} from './PetEffects';
 
 // type imported for type checking, naturally
-import {PetList} from '../domain/types/Pet';
+import {PetList} from './PetTypes';
 
 
 // define the type parameters for the state
@@ -54,7 +61,10 @@ const LOADING_STATE = new PetsState({
 
 export default createReducer(INITIAL_STATE, {
     [PETS_LOAD_START]() {
-        return LOADING_STATE;
+        return loop(
+            LOADING_STATE,
+            Effects.promise(loadPets)
+        );
     },
 
     [PETS_LOAD_FAIL](state, action) {
@@ -73,12 +83,15 @@ export default createReducer(INITIAL_STATE, {
         });
     },
 
-    [CREATE_PET_START](state) {
-        return new PetsState({
-            isLoading: true,
-            error: null,
-            pets: state.pets
-        });
+    [CREATE_PET_START](state, {payload: pet}) {
+        return loop(
+            new PetsState({
+                isLoading: true,
+                error: null,
+                pets: state.pets
+            }),
+            Effects.promise(createPet, pet)
+        );
     },
 
     [CREATE_PET_SUCCESS](state, action) {

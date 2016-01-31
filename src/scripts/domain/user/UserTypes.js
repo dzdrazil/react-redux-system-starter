@@ -1,6 +1,6 @@
 import t from 'tcomb';
 
-import {Password} from './Password';
+import {Password} from '../base/Password';
 
 /**
  * @class User

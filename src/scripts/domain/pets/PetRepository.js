@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-import {Pet, PetList} from '../types/Pet';
+import {Pet, PetList} from './PetTypes';
 
 /**
- * @class PetService
+ * @class PetRepository
  */
-class PetService {
+class PetRepository {
     /**
      * Get all pets the user has access to
      * @return {Promise<Array<Pet>>} A promise that unwraps to an array of pets
@@ -40,4 +40,4 @@ class PetService {
     }
 }
 
-export default new PetService();
+export default new PetRepository();
