@@ -1,4 +1,10 @@
 # react-redux-system-starter
+
+## This repo has moved!
+I've migrated my work over to this location:
+[https://gitlab.com/zdragnar/react-redux-starter](https://gitlab.com/zdragnar/react-redux-starter)
+
+
 *not* setup as isomorphic
 
 *Note:* This was originally intended to use jspm / system.js; however, because that project is still tied to babel 5.2.8 at the time of this writing, the project is using Browserify.  Expect this to change at some point in the future.
